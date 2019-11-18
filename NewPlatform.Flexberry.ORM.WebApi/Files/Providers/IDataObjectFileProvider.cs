@@ -1,4 +1,4 @@
-﻿namespace NewPlatform.Flexberry.ORM.ODataService.Files.Providers
+﻿namespace NewPlatform.Flexberry.ORM.WebApi.Files.Providers
 {
     using System;
     using System.Collections.Generic;

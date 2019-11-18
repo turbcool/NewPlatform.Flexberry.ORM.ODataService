@@ -1,4 +1,4 @@
-﻿namespace NewPlatform.Flexberry.ORM.ODataService.Controllers
+﻿namespace NewPlatform.Flexberry.ORM.WebApi.Controllers
 {
     using System;
     using System.IO;
@@ -10,10 +10,9 @@
 
     using ICSSoft.STORMNET;
 
-    using NewPlatform.Flexberry.ORM.ODataService.Files;
-    using NewPlatform.Flexberry.ORM.ODataService.Files.Providers;
+    using NewPlatform.Flexberry.ORM.WebApi.Files;
+    using NewPlatform.Flexberry.ORM.WebApi.Files.Providers;
 
-    using File = ICSSoft.STORMNET.FileType.File;
     using WebFile = ICSSoft.STORMNET.UserDataTypes.WebFile;
 
     /// <summary>
@@ -47,7 +46,7 @@
         /// <returns>Данные файла в виде  Base64String.</returns>
         public static string GetBase64StringFileData(string filePath)
         {
-            if (!System.IO.File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 return string.Empty;
             }
@@ -73,16 +72,13 @@
         [HttpGet]
         public HttpResponseMessage Get([FromUri] FileDescription fileDescription = null, [FromUri] bool getPreview = false)
         {
-            HttpResponseMessage response = null;
+            HttpResponseMessage response;
 
             Stream fileStream = null;
-            string fileName = null;
-            string fileMimeType = null;
-            long fileSize = 0;
 
             try
             {
-                fileStream = GetFileStream(fileDescription, out fileName, out fileMimeType, out fileSize);
+                fileStream = GetFileStream(fileDescription, out string fileName, out string fileMimeType, out long fileSize);
 
                 if (getPreview)
                 {
@@ -124,14 +120,12 @@
                 throw new ArgumentNullException(nameof(fileDescription));
             }
 
-            Stream fileStream = null;
-            Type dataObjectType = null;
-            Type filePropertyType = null;
+            Type filePropertyType;
 
             if (!string.IsNullOrEmpty(fileDescription.EntityPrimaryKey))
             {
                 // Запрашиваемый файл уже был связан с объектом данных, и нужно вычитать из него файловое свойство.
-                dataObjectType = Type.GetType(fileDescription.EntityTypeName, true);
+                var dataObjectType = Type.GetType(fileDescription.EntityTypeName, true);
                 filePropertyType = Information.GetPropertyType(dataObjectType, fileDescription.EntityPropertyName);
             }
             else
@@ -142,15 +136,15 @@
                 filePropertyType = typeof(WebFile);
             }
 
-            if (!HasDataObjectFileProvider(filePropertyType))
+            if (!FileController.HasDataObjectFileProvider(filePropertyType))
             {
                 throw new Exception(string.Format("DataObjectFileProvider for \"{0}\" property type not found.", filePropertyType.AssemblyQualifiedName));
             }
 
-            IDataObjectFileProvider dataObjectFileProvider = GetDataObjectFileProvider(filePropertyType);
+            IDataObjectFileProvider dataObjectFileProvider = FileController.GetDataObjectFileProvider(filePropertyType);
             object fileProperty = dataObjectFileProvider.GetFileProperty(fileDescription);
 
-            fileStream = dataObjectFileProvider.GetFileStream(fileProperty);
+            var fileStream = dataObjectFileProvider.GetFileStream(fileProperty);
             fileName = dataObjectFileProvider.GetFileName(fileProperty);
             fileMimeType = dataObjectFileProvider.GetFileMimeType(fileProperty);
             fileSize = fileStream.Length;

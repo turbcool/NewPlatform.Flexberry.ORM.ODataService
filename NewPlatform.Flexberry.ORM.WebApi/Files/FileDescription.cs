@@ -1,4 +1,4 @@
-﻿namespace NewPlatform.Flexberry.ORM.ODataService.Files
+﻿namespace NewPlatform.Flexberry.ORM.WebApi.Files
 {
     using System;
     using System.Collections.Generic;
@@ -217,7 +217,7 @@
         public FileDescription(string fileBaseUrl, string filePath)
             : this()
         {
-            if (!System.IO.File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException(string.Format("File \"{0}\" not found.", filePath));
             }

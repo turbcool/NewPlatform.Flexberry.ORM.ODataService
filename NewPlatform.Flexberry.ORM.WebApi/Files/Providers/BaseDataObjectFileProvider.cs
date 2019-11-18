@@ -1,4 +1,4 @@
-﻿namespace NewPlatform.Flexberry.ORM.ODataService.Files.Providers
+﻿namespace NewPlatform.Flexberry.ORM.WebApi.Files.Providers
 {
     using System;
     using System.Collections.Generic;
@@ -64,7 +64,7 @@
                 FileBaseUrl = FileBaseUrl,
                 FileName = GetFileName(fileProperty),
                 FileSize = GetFileSize(fileProperty),
-                FileMimeType = GetFileMimeType(fileProperty)
+                FileMimeType = GetFileMimeType(fileProperty),
             };
         }
 
@@ -236,9 +236,9 @@
             throw new Exception(
                 string.Format(
                     "Both \"{0}\" properties: \"{1}\" & \"{2}\" are undefined.",
-                nameof(fileDescription),
-                nameof(FileDescription.FileUploadKey),
-                nameof(FileDescription.EntityPrimaryKey)));
+                    nameof(fileDescription),
+                    nameof(FileDescription.FileUploadKey),
+                    nameof(FileDescription.EntityPrimaryKey)));
         }
 
         /// <summary>

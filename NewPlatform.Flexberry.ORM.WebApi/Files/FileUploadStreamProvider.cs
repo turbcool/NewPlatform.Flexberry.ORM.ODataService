@@ -1,4 +1,4 @@
-﻿namespace NewPlatform.Flexberry.ORM.ODataService.Files
+﻿namespace NewPlatform.Flexberry.ORM.WebApi.Files
 {
     using System.Net.Http;
     using System.Net.Http.Headers;

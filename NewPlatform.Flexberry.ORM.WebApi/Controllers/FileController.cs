@@ -1,4 +1,4 @@
-﻿namespace NewPlatform.Flexberry.ORM.ODataService.Controllers
+﻿namespace NewPlatform.Flexberry.ORM.WebApi.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@
 
     using ICSSoft.STORMNET;
 
-    using NewPlatform.Flexberry.ORM.ODataService.Files;
-    using NewPlatform.Flexberry.ORM.ODataService.Files.Providers;
+    using NewPlatform.Flexberry.ORM.WebApi.Files;
+    using NewPlatform.Flexberry.ORM.WebApi.Files.Providers;
 
     /// <summary>
     /// WebApi-контроллер, предназначенный для загрузки файлов на сервер и скачивания ранее загруженных файлов.

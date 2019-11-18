@@ -1,4 +1,4 @@
-﻿namespace NewPlatform.Flexberry.ORM.ODataService.Files.Providers
+﻿namespace NewPlatform.Flexberry.ORM.WebApi.Files.Providers
 {
     using System;
     using System.IO;
@@ -57,7 +57,7 @@
         /// </returns>
         public override object GetFileProperty(string filePath)
         {
-            if (!System.IO.File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException(string.Format("File \"{0}\" not found.", filePath));
             }
@@ -67,7 +67,7 @@
                                        {
                                            Name = fileDescription.FileName,
                                            Size = (int)fileDescription.FileSize,
-                                           Url = fileDescription.FileUrl
+                                           Url = fileDescription.FileUrl,
                                        };
 
             return fileProperty;
@@ -112,13 +112,10 @@
         /// </returns>
         public override Stream GetFileStream(object fileProperty)
         {
-            FileDescription fileDescription = new FileDescription(FileBaseUrl)
-                                                  {
-                                                      FileUrl = (fileProperty as WebFile)?.Url
-                                                  };
+            FileDescription fileDescription = new FileDescription(FileBaseUrl) { FileUrl = (fileProperty as WebFile)?.Url };
 
             string filePath = string.Concat(UploadsDirectoryPath, Path.DirectorySeparatorChar, fileDescription.FileUploadKey, Path.DirectorySeparatorChar, fileDescription.FileName);
-            if (!System.IO.File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException(string.Format("File \"{0}\" not found.", filePath));
             }

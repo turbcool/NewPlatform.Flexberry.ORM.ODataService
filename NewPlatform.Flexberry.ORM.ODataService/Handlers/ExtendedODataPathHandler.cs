@@ -2,18 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Linq;
     using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Web.OData.Routing;
     using Microsoft.OData.Core;
     using Microsoft.OData.Core.UriParser;
     using Microsoft.OData.Core.UriParser.Metadata;
     using Microsoft.OData.Core.UriParser.TreeNodeKinds;
-    using Microsoft.OData.Edm;
     using Microsoft.OData.Edm;
     using NewPlatform.Flexberry.ORM.ODataService.Expressions;
     using Semantic = Microsoft.OData.Core.UriParser.Semantic;

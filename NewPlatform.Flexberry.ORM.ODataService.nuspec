@@ -30,11 +30,9 @@
     <copyright>Copyright New Platform Ltd 2019</copyright>
     <tags>Flexberry ORM OData ODataService</tags>
     <dependencies>
-      <dependency id="Microsoft.AspNet.Cors" version="5.2.3" />
       <dependency id="Microsoft.AspNet.OData" version="5.7.0" />
       <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
       <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
-      <dependency id="Microsoft.AspNet.WebApi.Cors" version="5.2.3" />
       <dependency id="Microsoft.OData.Core" version="[6.15.0, 7.0.0)" />
       <dependency id="Microsoft.OData.Edm" version="6.15.0" />
       <dependency id="Microsoft.Spatial" version="6.15.0" />
